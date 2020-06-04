@@ -1,5 +1,4 @@
 import os
-import time
 import supervisely_lib as sly
 
 SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -50,3 +49,4 @@ if __name__ == "__main__":
 #@TODO: config.json
 # python -m pip install git+https://github.com/supervisely/supervisely
 # python setup.py develop
+# callback
