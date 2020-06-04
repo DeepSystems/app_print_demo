@@ -2,6 +2,9 @@ ARG REGISTRY
 ARG TAG
 FROM ${REGISTRY}/base-tensorflow:${TAG}
 
+pip install
+
+
 ############### copy code ###############
 ARG MODULE_PATH
 COPY $MODULE_PATH /workdir
