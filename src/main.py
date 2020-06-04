@@ -55,3 +55,8 @@ if __name__ == "__main__":
 # data.set(‘randomString’, sly.rand_str(10))
 # data.set({“a”: 111, “b”: 222})
 # api.task.state.set()
+
+# exec env
+# state всегда передается в callback
+# context + state по всем юзерам? + там будет labelerLogin, api_token, и тд
+# 
