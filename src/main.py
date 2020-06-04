@@ -29,11 +29,11 @@ def main():
         sly.app.DATA: data,
     }
 
+    #@TODO: how to send task_id from agent - env variables
+
     task_id = os.getenv("TASK_ID")
-    server_address = os.getenv("SERVER_ADDRESS")
     agent_token = os.getenv("AGENT_TOKEN")
-    api_token = os.getenv("API_TOKEN")
-    api = sly.Api(server_address, api_token, retry_count=5)
+    api = sly.Api.from_env(retry_count=5)
 
     # http://78.46.75.100:11111/apps/sessions/20
     jresp = api.task.set_data(task_id, payload)
@@ -49,4 +49,9 @@ if __name__ == "__main__":
 #@TODO: config.json
 # python -m pip install git+https://github.com/supervisely/supervisely
 # python setup.py develop
-# callback
+# корневой уровень переменных (занести все в data)
+# уменьшить количество строчек
+#@route- > @callback (rename)
+# data.set(‘randomString’, sly.rand_str(10))
+# data.set({“a”: 111, “b”: 222})
+# api.task.state.set()
