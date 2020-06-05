@@ -2,7 +2,7 @@ import os
 import supervisely_lib as sly
 
 SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
-my_app = sly.AppService(sly.logger)
+my_app = sly.AppService()
 
 
 @my_app.callback("generate")
@@ -34,10 +34,4 @@ if __name__ == "__main__":
 #@TODO: config.json
 # python -m pip install git+https://github.com/supervisely/supervisely
 # python setup.py develop
-# корневой уровень переменных (занести все в data)
-# уменьшить количество строчек
-#@route- > @callback (rename)
-# data.set(‘randomString’, sly.rand_str(10))
-# data.set({“a”: 111, “b”: 222})
-# api.task.state.set()
 # context + state по всем юзерам? + там будет labelerLogin, api_token, и тд
