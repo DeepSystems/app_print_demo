@@ -1,46 +1,31 @@
 import os
 import supervisely_lib as sly
+from supervisely_lib.app.app_service import AppService
 
 SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
+app = AppService(sly.logger)
 
 
-def generate_random_string(api, task_id, request_msg):
+@app.callback("generate")
+def generate_random_string(api: sly.Api, task_id, context, state):
     new_str = sly.rand_str(10)
-    api.task.set_data(task_id, new_str, "data.randomString")
-    print("!! done")
+    api.app_session.set_vars(task_id, "data.randomString", new_str)
 
 
 def main():
     with open(os.path.join(SOURCE_DIR, 'gui.html'), 'r') as file:
-        gui_template = file.read()
+        template = file.read()
 
     # data
     data = {
-        "randomString": "initial random value"
+        "randomString": "initial random value xxx"
     }
 
     # state
     state = {
     }
 
-    payload = {
-        sly.app.TEMPLATE: gui_template,
-        sly.app.STATE: state,
-        sly.app.DATA: data,
-    }
-
-    #@TODO: how to send task_id from agent - env variables
-
-    task_id = os.getenv("TASK_ID")
-    agent_token = os.getenv("AGENT_TOKEN")
-    api = sly.Api.from_env(retry_count=5)
-
-    # http://78.46.75.100:11111/apps/sessions/20
-    jresp = api.task.set_data(task_id, payload)
-
-    app_service = sly.app.AppService(sly.logger, task_id, server_address, agent_token, api_token)
-    app_service.add_route("generate_random_string", generate_random_string)
-    app_service.run()
+    app.run(template, data, state)
 
 
 if __name__ == "__main__":
@@ -55,8 +40,4 @@ if __name__ == "__main__":
 # data.set(‘randomString’, sly.rand_str(10))
 # data.set({“a”: 111, “b”: 222})
 # api.task.state.set()
-
-# exec env
-# state всегда передается в callback
 # context + state по всем юзерам? + там будет labelerLogin, api_token, и тд
-# 
