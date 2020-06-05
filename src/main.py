@@ -1,15 +1,15 @@
 import os
 import supervisely_lib as sly
-from supervisely_lib.app.app_service import AppService
 
 SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
-app = AppService(sly.logger)
+my_app = sly.AppService(sly.logger)
 
 
-@app.callback("generate")
+@my_app.callback("generate")
+@sly.timeit
 def generate_random_string(api: sly.Api, task_id, context, state):
     new_str = sly.rand_str(10)
-    api.app_session.set_vars(task_id, "data.randomString", new_str)
+    api.app.set_vars(task_id, "data.randomString", new_str)
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     state = {
     }
 
-    app.run(template, data, state)
+    my_app.run(template, data, state)
 
 
 if __name__ == "__main__":
