@@ -1,7 +1,6 @@
 import os
 import supervisely_lib as sly
 
-SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
 my_app = sly.AppService()
 
 
@@ -13,9 +12,6 @@ def generate_random_string(api: sly.Api, task_id, context, state):
 
 
 def main():
-    with open(os.path.join(SOURCE_DIR, 'gui.html'), 'r') as file:
-        template = file.read()
-
     # data
     data = {
         "randomString": "initial random value xxx"
@@ -25,13 +21,13 @@ def main():
     state = {
     }
 
-    my_app.run(template, data, state)
+    my_app.run(template_path=os.path.join(SOURCE_DIR, 'gui.html'), data=data, state=state)
 
 
 if __name__ == "__main__":
     main()
 
-#@TODO: config.json
+#@TODO:
 # python -m pip install git+https://github.com/supervisely/supervisely
 # python setup.py develop
 # context + state по всем юзерам? + там будет labelerLogin, api_token, и тд
