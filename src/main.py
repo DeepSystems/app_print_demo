@@ -21,11 +21,20 @@ def main():
     state = {
     }
 
+    # Example:
+    #SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
     my_app.run(template_path=os.path.join(SOURCE_DIR, 'gui.html'), data=data, state=state)
+    #my_app.run(data=data, state=state)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        sly.logger.critical('Unexpected exception in main.', exc_info=True, extra={
+            'event_type': sly.EventType.TASK_CRASHED,
+            'exc_str': str(e),
+        })
 
 #@TODO:
 # python -m pip install git+https://github.com/supervisely/supervisely
