@@ -1,12 +1,6 @@
-ARG REGISTRY
-ARG TAG
-FROM ${REGISTRY}/base-tensorflow:${TAG}
+ARG GIT_LOGIN
+ARG GIT_PASSWORD
 
+FROM supervisely/base-py:6
 
-############### copy code ###############
-ARG MODULE_PATH
-COPY $MODULE_PATH /workdir
-COPY supervisely_lib /workdir/supervisely_lib
-
-ENV PYTHONPATH /workdir:/workdir/src:/workdir/src/slim:/workdir/supervisely_lib/worker_proto:$PYTHONPATH
-WORKDIR /workdir/src
+RUN python -m pip install 'git+https://${GIT_LOGIN}:${GIT_PASSWORD}@github.com/DeepSystems/supervisely_py.git@import_alpha_images'
