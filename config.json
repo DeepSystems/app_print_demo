@@ -2,5 +2,5 @@
 	"name": "Demo print",
 	"description": "demo app  for debug purposes",
 	"init_script": "src/main.py",
-	"docker_image": "docker.deepsystems.io/supervisely/five/python-runner:import_alpha_images"
+	"docker_image": "docker.deepsystems.io/supervisely/five/app_demo_print"
 }

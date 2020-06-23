@@ -22,9 +22,10 @@ def main():
     }
 
     # Example:
-    #SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
+    SOURCE_DIR = os.path.dirname(os.path.realpath(__file__))
+    template_path = os.path.join(SOURCE_DIR, 'gui.html')
     #my_app.run(template_path=os.path.join(SOURCE_DIR, 'gui.html'), data=data, state=state)
-    my_app.run(data=data, state=state)
+    my_app.run(template_path=template_path, data=data, state=state)
 
 
 if __name__ == "__main__":
